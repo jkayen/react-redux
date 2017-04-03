@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Station from '../components/Station';
+import { convertSong } from '../utils';
+import { toggleSong } from '../action-creators/player';
 
 
-function filterByStation(songs,station){
-  return songs.filter(song=>song.genre===station);
+function filterByStation(songs, station) {
+  return songs.filter(song=>song.genre===station)
+    .map(convertSong);
 }
 
 const mapStateToProps = (state, ownProps)=>{
@@ -17,11 +20,11 @@ const mapStateToProps = (state, ownProps)=>{
   }
 }
 
-const mapDispatchToProps = (dispatch)=>{
+const mapDispatchToProps = (dispatch) => {
 
   return {
-    // toggleOne: dispatch.React
+    toggleOne: function (song, list) {return dispatch(toggleSong(song, list))}
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Station);
+export default connect(mapStateToProps, mapDispatchToProps)(Station);
