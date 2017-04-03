@@ -13,7 +13,7 @@ function getGenres (songs){
   return uniqueGenres;
 }
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state, ownProps)=>{
   getGenres(state.songs);
   return {
     stations: getGenres(state.songs)

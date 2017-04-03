@@ -18,7 +18,7 @@ const DUMMY_TOGGLE_ONE = function () {};
 export default function Station (props) {
   return (
     <div>
-      <h3>{ DUMMY_GENRE_NAME } Station</h3>
+      <h3>{ props.station } Station</h3>
       <Songs
         songs={DUMMY_SONGS}
         currentSong={DUMMY_CURRENT_SONG}
