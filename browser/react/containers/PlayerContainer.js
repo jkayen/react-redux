@@ -22,13 +22,29 @@ const mapDispatchToProps = (dispatch, ownProps)=>{
     prev: ()=> dispatch(previous()),
     toggle: (currentSong,currentSongList)=> {
       dispatch(toggleSong(currentSong, currentSongList))
-    }
+    },
+    setProgress: (position) =>  dispatch(setProgress(position))
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Player);
+class PlayerContainer extends Component  {
+  componentDidMount() {
+    AUDIO.addEventListener('ended', this.next);
+    AUDIO.addEventListener('timeupdate', () => {
+      this.props.setProgress(AUDIO.currentTime / AUDIO.duration);
+    });
+  }
+
+  render() {
+    return (
+      <Player {...this.props} />
+    )
+  }
+
+}
 
 
+ export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer);
   // componentDidMount() {
 
   //   AUDIO.addEventListener('ended', this.next);
